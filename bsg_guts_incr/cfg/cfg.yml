@@ -1,0 +1,47 @@
+# Main hammer config file
+
+# Locally installed tool path
+vlsi.core.local_tool_path: "../../ee477-modules"
+
+# Set top levels
+synthesis.inputs.top_module: "bsg_chip"
+sim.inputs.tb_name: "bsg_double_trouble_pcb"
+
+# Extra simulation arguments, add these directories to VCS search path
+sim.inputs.options: [
+  "+incdir+${bsg_root}/bsg_misc",
+  "+incdir+${bsg_root}/bsg_noc",
+  "+incdir+../../../common/v/packaging",
+  "+incdir+../../../common/v/manycore",
+
+  "+define+FSB_LEGACY=1",
+  "+define+NUM_MASTER_NODES=1",
+  "+define+CORE_0_PERIOD=20000", # For ASIC
+  "+define+IO_MASTER_0_PERIOD=15000", # For ASIC
+  "+define+CORE_1_PERIOD=20000", # For testbench
+  "+define+IO_MASTER_1_PERIOD=15000", # For testbench
+]
+sim.inputs.options_meta: [append, subst]
+
+# Custom SDC constraints
+vlsi.inputs:
+  # You can add SDC constraints directly here (list of strings)
+  custom_sdc_constraints: []
+  
+  # Additional SDC files to read
+  custom_sdc_files:
+    - "../../../tcl/bsg_tag_timing.tcl"
+    - "../../../tcl/bsg_chip/bsg_chip_timing_constraint.tcl"
+    - "constraints.tcl"
+  custom_sdc_files_meta: prependlocal # Prepend path of this config file!
+
+# Placement Constraints
+vlsi.inputs.placement_constraints:
+  - path: "TOP" # (this name isn't actually checked...)
+    type: toplevel
+    # Define chip dimensions
+    width:  500
+    height: 500
+    x: 0
+    y: 0
+    margins: {left: 0, right: 0, top: 0, bottom: 0}

@@ -1,0 +1,30 @@
+# List of all Verilog source files to include in this build.
+# Used by both synthesis and RTL simulation.
+synthesis.inputs.input_files: [
+  # BSG Modules
+  "${bsg_root}/bsg_misc/bsg_defines.v",
+  "${bsg_root}/bsg_misc/bsg_dff.v",
+  "${bsg_root}/bsg_misc/bsg_dff_en.v",
+  "${bsg_root}/bsg_tag/bsg_tag_pkg.v",
+  "${bsg_root}/bsg_tag/bsg_tag_master.v",
+  "${bsg_root}/bsg_tag/bsg_tag_client.v",
+  "${bsg_root}/bsg_misc/bsg_counter_clear_up.v",
+  "${bsg_root}/bsg_misc/bsg_mux2_gatestack.v",
+  "${bsg_root}/bsg_misc/bsg_dff_gatestack.v",
+  "${bsg_root}/bsg_async/bsg_launch_sync_sync.v", # HAD ASSERT!
+  "${bsg_root}/bsg_misc/bsg_dff_reset_en.v",
+  "${bsg_root}/bsg_mem/bsg_mem_1rw_sync.v",
+  "${bsg_root}/bsg_mem/bsg_mem_1rw_sync_synth.v", # Had ASSERT!
+  # "${bsg_root}/bsg_mem/bsg_mem_1r1w.v",
+  # "${bsg_root}/bsg_mem/bsg_mem_1r1w_synth.v",
+  
+  # Project Modules
+  "v/bsg_tag_incr_pkg.v",
+  "v/bsg_tag_incr.v",
+]
+synthesis.inputs.input_files_meta: [append, subst]
+
+# Add synthesis input files to simulation inputs
+# (Only for RTL sim)
+sim.inputs.input_files: synthesis.inputs.input_files
+sim.inputs.input_files_meta: [crossref, subst]

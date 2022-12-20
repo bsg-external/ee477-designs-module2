@@ -1,0 +1,114 @@
+#####################################################################
+# Packet Format
+#
+# N = max( ceil(log2(#_of_tag_clients)), 1 )
+# D = max(client_1_width, client_2_width, ..., client_n_width)
+# L = ceil(log2(D + 1))
+#
+# |<    4-bits    >|< N-bits >|<     1-bit    >|< L-bits >|< D-bits >|
+# +----------------+----------+----------------+----------+----------+
+# | replay command |  nodeID  | data_not_reset |  length  |   data   |
+# +----------------+----------+----------------+----------+----------+
+#
+# Replay Commands 
+#   0 = 0000 = Wait a cycle
+#   1 = 0001 = Send data
+#   2 = 0010 = Receive data
+#   3 = 0011 = Assert done_o ouput signal
+#   4 = 0100 = End test (calls $finish)
+#   5 = 0101 = Wait for cycle_counter == 0
+#   6 = 0110 = Initialize cycle_counter with a 16 bit number
+
+# For this design (bsg_tag_incr)
+#   N = 1
+#   D = 8
+#   L = 4
+
+#####################################################################
+#
+# RESET BSG TAG MASTER
+#
+# First, we must reset the bsg_tag_master. To do this, we send a 1, then we
+# send a bunch of 0's! By a bunch, the exact amount is
+# 2 ^ ( ceil( log2( N + 1 + L + D ) ) ) + 1 but more doesn't hurt so we send
+# a packet full of 0's and wait for 2^16 cycles. Every cycle will send another
+# 0 so this should be sufficient to reset master.
+#
+
+#SEND - Send a packet of 0's
+0001___0__0__0000__00000000
+#SET COUNTER - Set cycle_counter = 1024
+0110___00001000000000
+#WAIT COUNTER - Wait for cycle_counter to reach 0
+0101___00000000000000
+
+#####################################################################
+#
+# RESET BSG TAG CLIENT(S)
+#
+# Next, we should reset each client node. To do this we send a packet
+# that has all 1's for data, and has data_not_reset=0. The nodeID should
+# be the ID of the client we are reseting, and length should be the
+# corrent length of the packet. We should send this packet to each client.
+#
+
+# RESET CLIENT(0)
+#SEND - nodeID=0, data_not_reset=0, length=8, data=(2^8)-1
+0001___0__0__1000__11111111
+0110___00000000010000
+0101___00000000000000
+
+#####################################################################
+#
+# START TESTING
+#
+# We are now booted, time to start testing! This is testing tag increment
+# so we are going to send some data down bsg_tag, wait a few cycles to
+# make sure everything is propagated, and then check that the data
+# recieved is data+1.
+#
+
+
+#********* LOOK AT ME!!! ***********
+
+# SEND 1 - WAIT 32 CYCLES - RECV 2
+0001___0__1__1000__00000001
+0110___00000000100000
+0101___00000000000000
+0010___000000__00000010
+
+# SEND 2 - WAIT 32 CYCLES - RECV 3
+0001___0__1__1000__00000010
+0110___00000000100000
+0101___00000000000000
+0010___000000__00000011
+
+# SEND 3 - WAIT 32 CYCLES - RECV 4
+0001___0__1__1000__00000011
+0110___00000000100000
+0101___00000000000000
+0010___000000__00000100
+
+# SEND 4 - WAIT 32 CYCLES - RECV 5
+0001___0__1__1000__00000100
+0110___00000000100000
+0101___00000000000000
+0010___000000__00000101
+
+# SEND 5 - WAIT 32 CYCLES - RECV 6
+0001___0__1__1000__00000101
+0110___00000000100000
+0101___00000000000000
+0010___000000__00000110
+
+#####################################################################
+#
+# END TESTING
+#
+# All tests are complete at this point, use this command to call the
+# $finish() command in vcs and terminate the simulation!
+#
+
+#FINISH
+0100___00000000000000
+

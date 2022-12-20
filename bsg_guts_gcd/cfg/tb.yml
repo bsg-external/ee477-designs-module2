@@ -1,0 +1,36 @@
+# List of Verilog testbenches (or other sources) needed for simulation only.
+sim.inputs.input_files: [
+  # Basejump STL sources
+  "${bsg_root}/bsg_test/bsg_nonsynth_clock_gen.v",
+  "${bsg_root}/bsg_test/bsg_nonsynth_reset_gen.v",
+  "${bsg_root}/bsg_test/bsg_nonsynth_val_watcher_1p.v",
+  "${bsg_root}/bsg_test/test_bsg_data_gen.v",
+  "${bsg_root}/bsg_fsb/bsg_fsb_node_trace_replay.v",
+
+  # Boards sources
+  "../common/v/boards/bsg_double_trouble_pcb.v",
+  "../common/v/boards/bsg_asic_socket.v",
+  "../common/v/boards/bsg_gateway_socket.v",
+
+  # Manycore sources
+  "../common/v/manycore/bsg_manycore_spmd_loader.v",
+  "../common/v/manycore/bsg_manycore_vscale_pipeline_trace.v",
+  "../common/v/manycore/bsg_nonsynth_manycore_io_complex.v",
+  "../common/v/manycore/bsg_nonsynth_manycore_monitor.v",
+  "../common/v/manycore/bsg_1hold.v",
+  "../common/v/manycore/bsg_manycore_endpoint.v",
+  "../common/v/manycore/bsg_manycore_endpoint_standard.v",
+  "../common/v/manycore/bsg_manycore_links_to_fsb.v",
+  "../common/v/manycore/bsg_manycore_pkt_decode.v",
+  "../common/v/manycore/bsg_manycore_swap_ctrl.v",
+
+  # Toplevel sources
+  "v/bsg_gateway_chip.v",
+  "v/bsg_test_node_master.v",
+]
+sim.inputs.input_files_meta: [append, subst]
+
+# List of trace files for the simulation
+sim.inputs.trace_files: [
+  v/bsg_trace_master_0.tr # Incrementer trace file
+]

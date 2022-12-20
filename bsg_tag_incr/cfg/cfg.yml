@@ -1,0 +1,50 @@
+# Main hammer config file
+
+# Locally installed tool path
+# Make sure this is set to the top level directory containing module_top.mk
+vlsi.core.local_tool_path: "../../ee477-modules"
+
+# Set top levels
+synthesis.inputs.top_module: "bsg_tag_incr"
+sim.inputs.tb_name: "bsg_tag_incr_tb"
+
+# Don't synthesize these gate-level netlist modules
+# List the names of any modules that don't require synthesis
+synthesis.inputs.preserve_modules: []
+
+# Extra simulation arguments, add these directories to VCS search path
+# (remove if you don't need basejump_stl for simulations)
+sim.inputs.options: [
+  "+incdir+${bsg_root}/bsg_misc",
+  "+incdir+${bsg_root}/bsg_tag",
+  "+define+BSG_TAG_CLOCK_PERIOD_PS=40000",
+  "+define+BSG_CORE_CLOCK_PERIOD_PS=10000",
+]
+sim.inputs.options_meta: [append, subst]
+
+# Formal HDL commands (for parsing source files)
+# Copy sim input options, since they share the same syntax for some commands
+formal.imputs.hdl_cmd_list: sim.inputs.options
+formal.imputs.hdl_cmd_list_meta: [crossref, subst]
+
+# Custom SDC constraints
+vlsi.inputs:
+  # You can add SDC constraints directly here (list of strings)
+  custom_sdc_constraints: []
+  
+  # Additional SDC files to read
+  custom_sdc_files:
+    - "../../../tcl/bsg_tag_timing.tcl"
+    - "constraints.tcl"
+  custom_sdc_files_meta: prependlocal # Prepend path of this config file!
+
+# Placement Constraints
+vlsi.inputs.placement_constraints:
+  - path: "TOP" # (this name isn't actually checked...)
+    type: toplevel
+    # TODO: define chip dimensions
+    width:  200
+    height: 200
+    x: 0
+    y: 0
+    margins: {left: 0, right: 0, top: 0, bottom: 0}
