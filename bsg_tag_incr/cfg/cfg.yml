@@ -1,9 +1,5 @@
 # Main hammer config file
 
-# Locally installed tool path
-# Make sure this is set to the top level directory containing module_top.mk
-vlsi.core.local_tool_path: "../../ee477-modules"
-
 # Set top levels
 synthesis.inputs.top_module: "bsg_tag_incr"
 sim.inputs.tb_name: "bsg_tag_incr_tb"
@@ -17,7 +13,7 @@ synthesis.inputs.preserve_modules: []
 sim.inputs.options: [
   "+incdir+${bsg_root}/bsg_misc",
   "+incdir+${bsg_root}/bsg_tag",
-  "+define+BSG_TAG_CLOCK_PERIOD_PS=40000",
+  "+define+BSG_TAG_CLOCK_PERIOD_PS=20000",
   "+define+BSG_CORE_CLOCK_PERIOD_PS=10000",
 ]
 sim.inputs.options_meta: [append, subst]
@@ -34,7 +30,7 @@ vlsi.inputs:
   
   # Additional SDC files to read
   custom_sdc_files:
-    - "../../../tcl/bsg_tag_timing.tcl"
+    - "../../../ee477-modules/tcl/bsg_tag_timing.tcl"
     - "constraints.tcl"
   custom_sdc_files_meta: prependlocal # Prepend path of this config file!
 
@@ -42,7 +38,6 @@ vlsi.inputs:
 vlsi.inputs.placement_constraints:
   - path: "TOP" # (this name isn't actually checked...)
     type: toplevel
-    # TODO: define chip dimensions
     width:  200
     height: 200
     x: 0
