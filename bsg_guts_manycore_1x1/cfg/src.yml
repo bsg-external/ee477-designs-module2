@@ -1,5 +1,6 @@
+# src.yml - hammer source file config
+
 # List of all Verilog source files to include in this build.
-# Used by both synthesis and RTL simulation.
 synthesis.inputs.input_files: [
   "../common/v/bsg_guts.vh", # Some definitions
   
@@ -156,7 +157,7 @@ synthesis.inputs.input_files: [
 ]
 synthesis.inputs.input_files_meta: [append, subst]
 
-# Add synthesis input files to simulation inputs
-# (Only for RTL sim)
+# Add synthesis input files to simulation inputs (Only for RTL sim)
 sim.inputs.input_files: synthesis.inputs.input_files
 sim.inputs.input_files_meta: [crossref, subst]
+

@@ -1,5 +1,7 @@
-# List of Verilog testbenches (or other sources) needed for simulation only.
-sim.inputs.input_files: [
+# tb.yml - Simulation Testbench Configuration
+
+# List of Verilog testbenches (or other sources) needed for simulations.
+sim.inputs.tb_input_files: [
   # Basejump STL sources
   "${bsg_root}/bsg_test/bsg_nonsynth_clock_gen.v",
   "${bsg_root}/bsg_test/bsg_nonsynth_reset_gen.v",
@@ -28,9 +30,34 @@ sim.inputs.input_files: [
   "v/bsg_gateway_chip.v",
   "v/bsg_test_node_master.v",
 ]
-sim.inputs.input_files_meta: [append, subst]
+sim.inputs.tb_input_files_meta: [subst]
+
+# Toplevel simulation module name
+sim.inputs.tb_name: "bsg_double_trouble_pcb"
+
+# Search directories for `include directives in simulations
+sim.inputs.tb_incdir: [
+  "${bsg_root}/bsg_misc",
+  "${bsg_root}/bsg_noc",
+  "../../../common/v/packaging",
+  "../../../common/v/manycore",
+]
+sim.inputs.tb_incdir_meta: [subst]
+
+# Macro definitions for simulations
+sim.inputs.tb_defines: [
+  "FSB_LEGACY=1",
+  "NUM_MASTER_NODES=1",
+  "CORE_0_PERIOD=20000", # For ASIC
+  "IO_MASTER_0_PERIOD=15000", # For ASIC
+  "CORE_1_PERIOD=20000", # For testbench
+  "IO_MASTER_1_PERIOD=15000", # For testbench
+]
+sim.inputs.tb_defines_meta: [subst]
 
 # List of trace files for the simulation
 sim.inputs.trace_files: [
-  v/bsg_trace_master_0.tr # Incrementer trace file
+  "v/bsg_trace_master_0.tr" # Incrementer trace file
 ]
+sim.inputs.trace_files_meta: [subst]
+

@@ -1,30 +1,15 @@
-# Main hammer config file
+# cfg.yml - Main hammer config file
 
-# Locally installed tool path
-vlsi.core.local_tool_path: "../../ee477-modules"
-
-# Set top levels
+# Set top level for synthesis
 synthesis.inputs.top_module: "bsg_chip"
-sim.inputs.tb_name: "bsg_double_trouble_pcb"
 
-# Extra simulation arguments, add these directories to VCS search path
-sim.inputs.options: [
-  # "-assert-svaext",
-  "+incdir+${bsg_root}/bsg_misc",
-  "+incdir+${bsg_root}/hard/fakeram",
-  "+incdir+${bsg_root}/bsg_noc",
-  "+incdir+../../../common/v/packaging",
-  "+incdir+../../../common/v/manycore",
-  "+incdir+../../../common/v/manycore/vanilla_bean",
+# Don't synthesize these gate-level netlist modules
+synthesis.inputs.preserve_modules: []
 
-  "+define+FSB_LEGACY=1",
-  "+define+NUM_MASTER_NODES=1",
-  "+define+CORE_0_PERIOD=20000", # For ASIC
-  "+define+IO_MASTER_0_PERIOD=15000", # For ASIC
-  "+define+CORE_1_PERIOD=20000", # For testbench
-  "+define+IO_MASTER_1_PERIOD=15000", # For testbench
-]
-sim.inputs.options_meta: [append, subst]
+# Formal HDL commands (for parsing source files)
+# Copy sim input options, since they share the same syntax for some commands
+#formal.imputs.hdl_cmd_list: sim.inputs.options
+#formal.imputs.hdl_cmd_list_meta: [crossref, subst]
 
 # Custom SDC constraints
 vlsi.inputs:
@@ -37,11 +22,6 @@ vlsi.inputs:
     - "../../../tcl/bsg_chip/bsg_chip_timing_constraint.tcl"
     - "constraints.tcl"
   custom_sdc_files_meta: prependlocal # Prepend path of this config file!
-
-# Formal HDL commands (for parsing source files)
-# Copy sim input options, since they share the same syntax for some commands
-formal.imputs.hdl_cmd_list: sim.inputs.options
-formal.imputs.hdl_cmd_list_meta: [crossref, subst]
 
 sram_generator.fakeram.pinPitch_nm: 700
 vlsi.inputs.sram_parameters: [
@@ -90,3 +70,4 @@ vlsi.inputs.placement_constraints:
     orientation: my
 
 vlsi.inputs.pin.assignments: [] # No pin constraints
+

@@ -1,5 +1,7 @@
-# List of Verilog testbenches (or other sources) needed for simulation only.
-sim.inputs.input_files: [
+# tb.yml - Simulation Testbench Configuration
+
+# List of Verilog testbenches (or other sources) needed for simulations.
+sim.inputs.tb_input_files: [
   # BSG Modules
   "${bsg_root}/bsg_tag/bsg_tag_pkg.v",
   "${bsg_root}/bsg_misc/bsg_defines.v",
@@ -14,9 +16,27 @@ sim.inputs.input_files: [
   "v/bsg_tag_trace_replay.v",
   "v/bsg_tag_ram_tb.v",
 ]
-sim.inputs.input_files_meta: [append, subst]
+sim.inputs.tb_input_files_meta: [subst]
+
+# Toplevel simulation module name
+sim.inputs.tb_name: "bsg_tag_ram_tb"
+
+# Search directories for `include directives in simulations
+sim.inputs.tb_incdir: [
+  "${bsg_root}/bsg_misc",
+  "${bsg_root}/bsg_tag",
+]
+sim.inputs.tb_incdir_meta: [subst]
+
+# Macro definitions for simulations
+sim.inputs.tb_defines: [
+  "BSG_TAG_CLOCK_PERIOD_PS=20000",
+  "BSG_CORE_CLOCK_PERIOD_PS=10000",
+]
+sim.inputs.tb_defines_meta: [subst]
 
 # List of trace files for the simulation
 sim.inputs.trace_files: [
   "v/trace.tr"
 ]
+
