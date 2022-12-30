@@ -39,8 +39,8 @@ sim.inputs.tb_name: "bsg_double_trouble_pcb"
 sim.inputs.tb_incdir: [
   "${bsg_root}/bsg_misc",
   "${bsg_root}/bsg_noc",
-  "../../../common/v/packaging",
-  "../../../common/v/manycore",
+  "../common/v/packaging",
+  "../common/v/manycore",
 ]
 sim.inputs.tb_incdir_meta: [subst]
 

@@ -116,9 +116,9 @@ sim.inputs.tb_incdir: [
   "${bsg_root}/bsg_misc",
   "${bsg_root}/hard/fakeram",
   "${bsg_root}/bsg_noc",
-  "../../../common/v/packaging",
-  "../../../common/v/manycore",
-  "../../../common/v/manycore/vanilla_bean",
+  "../common/v/packaging",
+  "../common/v/manycore",
+  "../common/v/manycore/vanilla_bean",
 ]
 sim.inputs.tb_incdir_meta: [subst]
 
