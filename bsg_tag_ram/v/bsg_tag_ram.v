@@ -38,7 +38,7 @@ module bsg_tag_ram
 
   // TODO: Create the tag-ram design shown in the module document. Use
   // bsg_tag_incr to help you out! When using bsg_mem_1rw_sync, set the
-  // parameter 'latch_last_read_p' to 1
+  // parameter 'latch_last_read_p' to 0
 
 
 endmodule
