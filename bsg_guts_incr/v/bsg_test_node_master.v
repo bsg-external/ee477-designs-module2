@@ -97,7 +97,7 @@ module bsg_test_node_master
   logic done_lo;
 
   // The infamous trace-replay
-  bsg_fsb_node_trace_replay #( .ring_width_p(trace_width_lp), .rom_addr_width_p(rom_addr_width_lp) )
+  bsg_trace_replay #( .payload_width_p(trace_width_lp), .rom_addr_width_p(rom_addr_width_lp), .debug_p(2) )
     trace_replay
       (.clk_i      (clk_i)
       ,.reset_i    (reset_i)

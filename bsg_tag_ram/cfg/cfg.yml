@@ -6,6 +6,10 @@ synthesis.inputs.top_module: "bsg_tag_ram"
 # Don't synthesize these gate-level netlist modules
 synthesis.inputs.preserve_modules: []
 
+# Turn-off clock gating, issue with sky130 latch model in some clock gate cells
+# when coming out of x leading to failed simulations.
+synthesis.clock_gating_mode: ""
+
 # Custom SDC constraints
 vlsi.inputs:
   # You can add SDC constraints directly here (list of strings)
