@@ -20,6 +20,7 @@ sim.inputs.tb_input_files_meta: [subst]
 
 # Toplevel simulation module name
 sim.inputs.tb_name: "bsg_tag_ram_tb"
+sim.inputs.dut_path: "bsg_tag_ram_tb.DUT"
 
 # Search directories for `include directives in simulations
 sim.inputs.tb_incdir: [
