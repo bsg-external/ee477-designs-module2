@@ -26,6 +26,7 @@ sim.inputs.dut_path: "bsg_tag_ram_tb.DUT"
 sim.inputs.tb_incdir: [
   "${bsg_root}/bsg_misc",
   "${bsg_root}/bsg_tag",
+  "${bsg_root}/hard/fakeram",
 ]
 sim.inputs.tb_incdir_meta: [subst]
 
