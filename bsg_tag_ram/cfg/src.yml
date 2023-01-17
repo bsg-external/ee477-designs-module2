@@ -18,11 +18,6 @@ synthesis.inputs.input_files: [
   "${bsg_root}/bsg_mem/bsg_mem_1rw_sync.v",
   "${bsg_root}/bsg_mem/bsg_mem_1rw_sync_synth.v",
 
-  # Hard swap files 
-  # TODO: comment in/out to enable/disable hard macro swapping
-  # "${bsg_root}/hard/fakeram/bsg_mem_1rw_sync_macros.vh",
-  # "${bsg_root}/hard/fakeram/gen/bsg_mem_1rw_sync.v",
-  
   # Project Modules
   "v/bsg_tag_ram_pkg.v",
   "v/bsg_tag_ram.v",
