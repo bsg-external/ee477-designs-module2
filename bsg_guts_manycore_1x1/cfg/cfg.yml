@@ -29,9 +29,7 @@ vlsi.inputs:
 
 sram_generator.fakeram.pinPitch_nm: 700
 vlsi.inputs.sram_parameters: [
-    # TODO: remove for students to fill in?
-    {name: "fakeram_d1024_w32", family: "1rw", depth:  1024, width: 32, mask: True, mux: 1, vt: ""},
-    {name: "fakeram_d128_w62",  family: "1rw", depth:   128, width: 62, mask: True, mux: 1, vt: ""},
+    # TODO: add SRAMs
   ]
 
 # Placement Constraints
@@ -45,33 +43,8 @@ vlsi.inputs.placement_constraints:
     y: 0
     margins: {left: 0, right: 0, top: 0, bottom: 0}
   
-  # Instruction memory
-  - path: "bsg_chip/guts/n[0].clnt.clnt/genblk1.node/bm/y[0].x[0].tile/proc/h.z/vanilla_core/imem_0/macro.mem"
-    type: hardmacro
-    x:  968.98
-    y:  228.48
-    orientation: r0
+  # TODO: add SRAM placement constraints
   
-  # Data memory
-  - path: "bsg_chip/guts/n[0].clnt.clnt/genblk1.node/bm/y[0].x[0].tile/proc/h.z/bnkd_xbar/z[0].m1rw_mask/macro.mem"
-    type: hardmacro
-    x:  968.98
-    y:  345.44
-    orientation: r0
-  
-  # FIFO 0
-  - path: "bsg_chip/guts/n[0].clnt.clnt/genblk1.node/l2f/bct/bcti/b1_ntf/rof[0].psdlrg.fifo/big1p/mem_1srw/macro.mem"
-    type: hardmacro
-    x:   0.00
-    y: 340.00
-    orientation: my
-  
-  # FIFO 1
-  - path: "bsg_chip/guts/n[0].clnt.clnt/genblk1.node/l2f/bct/bcti/b1_ntf/rof[1].psdlrg.fifo/big1p/mem_1srw/macro.mem"
-    type: hardmacro
-    x:   0.00
-    y:  60.00
-    orientation: my
 
 vlsi.inputs.pin.assignments: [] # No pin constraints
 
