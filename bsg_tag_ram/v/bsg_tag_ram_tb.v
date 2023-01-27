@@ -14,9 +14,8 @@ module bsg_tag_ram_tb
   ();
 
   initial begin
-    $vcdpluson;
-    $vcdplusmemon;
-    $vcdplusautoflushon;
+    $fsdbDumpfile("waveform.fsdb");
+    $fsdbDumpvars();
     $set_x_prop("tmerge");
     $display( "%m: is Xprop active = %d",$is_xprop_active() );
   end

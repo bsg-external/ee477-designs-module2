@@ -14,9 +14,8 @@ module bsg_tag_incr_tb
   ();
 
   initial begin
-    $vcdpluson;
-    $vcdplusmemon;
-    $vcdplusautoflushon;
+    $fsdbDumpfile("waveform.fsdb");
+    $fsdbDumpvars();
   end
 
   // BSG Tag setup

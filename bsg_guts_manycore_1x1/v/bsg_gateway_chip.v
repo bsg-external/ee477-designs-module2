@@ -8,9 +8,8 @@ module bsg_gateway_chip
   localparam io_master_1_period_lp = `IO_MASTER_1_PERIOD;
 
   initial begin
-    $vcdpluson;
-    $vcdplusmemon;
-    $vcdplusautoflushon;
+    $fsdbDumpfile("waveform.fsdb");
+    $fsdbDumpvars();
   end
 
   initial begin
