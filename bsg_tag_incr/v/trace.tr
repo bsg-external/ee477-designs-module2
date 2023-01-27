@@ -28,10 +28,10 @@
 #
 # RESET BSG TAG MASTER
 #
-# First, we must reset the bsg_tag_master. To do this, we send a 1, then we
+# First, we must reset the bsg_tag_master. To do this, we
 # send a bunch of 0's! By a bunch, the exact amount is
 # 2 ^ ( ceil( log2( N + 1 + L + D ) ) ) + 1 but more doesn't hurt so we send
-# a packet full of 0's and wait for 2^16 cycles. Every cycle will send another
+# a packet full of 0's and wait for 2^10 cycles. Every cycle will send another
 # 0 so this should be sufficient to reset master.
 #
 
@@ -55,8 +55,6 @@
 # RESET CLIENT(0)
 #SEND - nodeID=0, data_not_reset=0, length=8, data=(2^8)-1
 0001___0__0__1000__11111111
-0110___00000000010000
-0101___00000000000000
 
 #####################################################################
 #
