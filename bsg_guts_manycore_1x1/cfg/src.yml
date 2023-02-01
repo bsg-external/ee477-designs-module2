@@ -118,13 +118,11 @@ synthesis.inputs.input_files: [
   # Manycore 
   "../common/v/manycore/bsg_1hold.v",
   "../common/v/manycore/bsg_manycore.v",
-  "../common/v/manycore/bsg_manycore_accel_default.v",
   "../common/v/manycore/bsg_manycore_endpoint.v",
   "../common/v/manycore/bsg_manycore_endpoint_standard.v",
   "../common/v/manycore/bsg_manycore_hetero_socket.v",
   "../common/v/manycore/bsg_manycore_link_sif_tieoff.v",
   "../common/v/manycore/bsg_manycore_links_to_fsb.v",
-  "../common/v/manycore/bsg_manycore_mesh.v",
   "../common/v/manycore/bsg_manycore_mesh_node.v",
   "../common/v/manycore/bsg_manycore_pkt_decode.v",
   "../common/v/manycore/bsg_manycore_pkt_encode.v",

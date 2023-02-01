@@ -7,7 +7,6 @@
  * the ee477-packaging directory.
  */
 module bsg_chip
-    `include "bsg_pinout.v"
     `bsg_pinout_macro
 
     // Pack the input data
