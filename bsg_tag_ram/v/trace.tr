@@ -30,7 +30,7 @@
 # a packet full of 0's and wait for 2^10 cycles. Every cycle will send another
 # 0 so this should be sufficient to reset master.
 #
-# NOTE: 2^14 is a lot of zeros, this is very conservative... if simulation
+# NOTE: 2^10 is a lot of zeros, this is very conservative... if simulation
 #       is taking really long, tightening up this number is a quick way to
 #       save cycles.
 #
