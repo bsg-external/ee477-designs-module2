@@ -128,9 +128,6 @@
 // End UCSD BGA 332 PAD Definitions\
 // **********************************************************************\
 \
-`include "bsg_iopad_macros.v"\
-`include "bsg_iopad_mapping.v"\
-`include "bsg_iopads.v"\
 `bsg_iopads_macro\
 // `include "bsg_iopads_physical_only.v"\
 
